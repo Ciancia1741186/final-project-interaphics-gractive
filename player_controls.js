@@ -21,19 +21,45 @@ var bbox = 11;
 
 
 
+// ANIMATION SETTINGS //
+var anim_idle = 0;
+var anim_Fdash = 1;
+var anim_Bdash = 2;
+var anim_kick = 3;
+var anim_punch = 4;
+var anim_hit = 5;
+var anim_KO = 6;
+
+var animation_red = [];
+var animation_blue = [];
+var animation = [animation_red,animation_blue];
+
+var anim_index= [0,0];
+
+function setAnimation(player,Id){
+    animation[Id][anim_idle] = animation_Idle(player, Id, pose[Id]);
+    animation[Id][anim_Fdash] = animation_Forward(player, Id, pose[Id], mov_duration);
+    animation[Id][anim_Bdash] = animation_Back(player, Id, pose[Id], mov_duration);
+    animation[Id][anim_kick] = animation_Kick(player, Id, pose[Id], kick_duration);
+    animation[Id][anim_punch] = animation_Punch(player, Id, pose[Id], punch_duration);
+    animation[Id][anim_hit] = animation_HitByKick(player, Id, pose[Id], hit_duration);
+    animation[Id][anim_KO] = animation_KO(player, Id, pose[Id], 1200);
+}
+// ------------------ //
+
+
 
 // CONTROL VARIABLE //
 var keyFlag = [null, null];
 var hurtFlag = [null, null];
+var hitFlag = [null, null];
+
+var refreshFlag = false;
 
 var action = [null, null];
 var pose = [null, null];
+// ---------------- //
 
-var animation_red = [null,null,null,null,null];
-var animation_blue = [null,null,null,null,null];
-var animation = [animation_red,animation_blue];
-
-var anim_index= [0,0];
 
 
 function reset(player,Id){
@@ -43,50 +69,41 @@ function reset(player,Id){
 
     pose[Id] = pose_Bend(Id);
     action[Id] = "idle";
-    animation[Id][0] = animation_Idle(player,Id,pose[Id]);
-    animation[Id][1] = animation_Forward(player,Id,pose[Id],mov_duration);
-    animation[Id][2] = animation_Back(player,Id,pose[Id],mov_duration);
-    animation[Id][3] = animation_Kick(player,Id,pose[Id],kick_duration);
-    animation[Id][4] = animation_Back(player,Id,pose[Id],hit_duration);
-
-    anim_index[Id] = 0;
-    animation[Id][anim_index[Id]].start();
+    
+    changeAnimation(animation, anim_index, anim_idle, Id);
 }
 // ----------------- //
 
 
 // STATS //
-var mov_speed_forward = 0.15;
-var mov_speed_back = 0.12;
+var mov_speed_forward = 0.2;
+var mov_speed_back = 0.15;
 
 var mov_duration = 300;
-var kick_duration = 1000;
-var hit_duration = 400;
+var kick_duration = 800;
+var punch_duration = 500;
+var hit_duration = 500;
 
 var edge = 15; //the edges of the screen
-var distance = 5; //minimum distance between the two figther
+var distance = 4; //minimum distance between the two figther
 // ----- //
 
 
 //------------------------------------PLAYER CONTROLS----------------------------------------//
 function player_Handler(key, player, Id){
 
-    if (key.keyCode == 97){
-        animation[Id][anim_index[Id]].stop();
-    }
-
-
     if (Id) { //Blue
         var forward = 111; // o
         var back = 112;    // p
         var kick = 107;    // k
+        var punch = 106;   // j
     }
     else{ 
         var forward = 119; // w
         var back = 113;    // q
         var kick = 115;    // s
+        var punch = 100;   // d
     }
-
 
 
 	if (keyFlag[Id]){
@@ -94,26 +111,35 @@ function player_Handler(key, player, Id){
         switch(key.keyCode){
 
             case forward:                   
-                // control
-                keyFlag[Id] = false;
                 action[Id] = "forward";
             break;
 
 
             case back:
-                // control
-                keyFlag[Id] = false;
                 action[Id] = "back";
             break;
 
 
             case kick:
-                // control
-                keyFlag[Id] = false;
                 action[Id] = "kick";
             break; 
+
+
+            case punch:
+                action[Id] = "punch";
+            break;
         }    
-	}
+    }
+    
+    var restart = 32; //space
+
+    if (refreshFlag){
+        switch(key.keyCode){
+            case restart:
+                window.location.reload();
+            break;
+        }
+    }
 }
 //-------------------------------------------------------------------------------------------//
 
@@ -131,13 +157,9 @@ function update(player,p_Id,adv,a_Id){
     switch(action[p_Id]){
 
         case "forward":
-            // animation
-            if (anim_index[p_Id] != 1) {
-                animation[p_Id][anim_index[p_Id]].stop();
-                anim_index[p_Id] = 1;
-                animation[p_Id][anim_index[p_Id]].start();
-            }
-
+            keyFlag[p_Id] = false;
+            // change animation
+            if (anim_index[p_Id] != anim_Fdash) { changeAnimation(animation, anim_index, anim_Fdash, p_Id); }
 
             if(p_Id){ // Blue
                 var limit = limit_left(pos,a_pos);
@@ -151,13 +173,9 @@ function update(player,p_Id,adv,a_Id){
 
 
         case "back":
-            // animation
-            if (anim_index[p_Id] != 2) {
-                animation[p_Id][anim_index[p_Id]].stop();
-                anim_index[p_Id] = 2;
-                animation[p_Id][anim_index[p_Id]].start();
-            }
-
+            keyFlag[p_Id] = false;
+            // change animation
+            if (anim_index[p_Id] != anim_Bdash) { changeAnimation(animation, anim_index, anim_Bdash, p_Id); }
 
             if (p_Id){ // Blue
                 var limit = limit_right(pos,a_pos);
@@ -171,32 +189,59 @@ function update(player,p_Id,adv,a_Id){
 
 
         case "kick":
-            // animation
-            if (anim_index[p_Id] != 3) {
-                animation[p_Id][anim_index[p_Id]].stop();
-                anim_index[p_Id] = 3;
-                animation[p_Id][anim_index[p_Id]].start();
-            }
+            keyFlag[p_Id] = false;
+            // change animation
+            if (anim_index[p_Id] != anim_kick) { changeAnimation(animation, anim_index, anim_kick, p_Id); }
 
-
-            if (hurtFlag[a_Id]){
+            if (hurtFlag[a_Id] & hitFlag[p_Id]){
                 if (isHit(player, adv, LBLeg)) {
                     hurtFlag[a_Id] = false;
-                    action[a_Id] = "hit";
+                    hp[a_Id] -= 10;
+                    if (hp[a_Id] <= 0) { action[a_Id] = "KO"; }
+                    else { action[a_Id] = "hit"; }  
                 }
             }
         break;
 
 
-        case "hit":
-            // animation
-            if (anim_index[p_Id] != 2) {
-                animation[p_Id][anim_index[p_Id]].stop();
-                anim_index[p_Id] = 2;
-                animation[p_Id][anim_index[p_Id]].start();
+        case "punch":
+            keyFlag[p_Id] = false;
+            // change animation
+            if (anim_index[p_Id] != anim_punch) { changeAnimation(animation, anim_index, anim_punch, p_Id); }
+
+            if (hurtFlag[a_Id] & hitFlag[p_Id]){
+                if (isHit(player, adv, LFArm)) {
+                    hurtFlag[a_Id] = false;
+                    hp[a_Id] -= 10;
+                    if (hp[a_Id] <= 0) { action[a_Id] = "KO"; }
+                    else { action[a_Id] = "hit"; }                
+                }
             }
+        break;
+        
 
 
+        case "hit":
+            keyFlag[p_Id] = false;
+            // // change animation
+            if (anim_index[p_Id] != anim_hit) { changeAnimation(animation, anim_index, anim_hit, p_Id); }
+
+            if (p_Id){ // Blue
+                var limit = limit_right(pos,a_pos);
+                pos = Math.min(limit,pos + 0.08); 
+            }
+            else{ // Red
+                var limit = limit_left(pos,a_pos);
+                pos = Math.max(limit,pos - 0.08); 
+            }
+        break;
+
+
+
+        case "KO":
+            keyFlag[p_Id] = false;
+            // // change animation
+            if (anim_index[p_Id] != anim_KO) { changeAnimation(animation, anim_index, anim_KO, p_Id); }
             if (p_Id){ // Blue
                 var limit = limit_right(pos,a_pos);
                 pos = Math.min(limit,pos + 0.2); 
@@ -209,10 +254,22 @@ function update(player,p_Id,adv,a_Id){
 
     }
     player[body].position.x = pos;
+    //
+    //
     pippo(p_Id, action[p_Id]);
+    //
+    //
 }
 
 
+// HP UPDATE
+var hp = [100, 100];
+
+function update_Hp(hp_bar){
+    hp_bar[redId].style.width = hp[redId] + '%';
+    hp_bar[blueId].style.width = hp[blueId] + '%';
+}
+//
 
 
 
@@ -232,4 +289,50 @@ function limit_right(p_pos, a_pos){
     if (p_pos < a_pos) { limit = a_pos - distance; }
 
     return limit;
+}
+
+
+// SET HIT-FLAG
+function setHitFlag(Id,value){
+    hitFlag[Id] = value;
+}
+
+
+
+
+
+
+// ENDGAME
+function endGame(l_Id){  // Ineluttabile
+
+    keyFlag = [false, false];
+
+    // Win Quotes
+    var win_quote = document.createElement('div');
+    
+    if (l_Id == blueId) {  // RED WINS
+        var w_Id = redId;
+        win_quote.style.cssText = 'position: absolute; left: 490px; top: 100px; font-size: 80px; color:red';
+        document.body.appendChild(win_quote);
+        win_quote.innerHTML = "RED WINS";
+    }
+    else {                 // BLUE WINS
+        var w_Id = blueId;
+        win_quote.style.cssText = 'position: absolute; left: 470px; top: 100px; font-size: 80px; color:blue';
+        document.body.appendChild(win_quote);
+        win_quote.innerHTML = "BLUE WINS";
+    }
+    
+    action[l_Id] = "defeated";
+    action[w_Id] = "victorious";
+    //
+
+    // Restart Quote
+    refreshFlag = true;
+
+    var restart_quote = document.createElement('div');
+    restart_quote.style.cssText = 'position: absolute; left: 550px; top: 180px; font-size: 30px; color:white';
+    document.body.appendChild(restart_quote);
+    restart_quote.innerHTML = "press SPACE to restart";
+    //
 }

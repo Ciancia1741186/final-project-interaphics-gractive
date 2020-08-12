@@ -65,7 +65,7 @@ function pose_Empty() {
 		LBLeg_rotation_z: 0,
 		
 		//
-		body_position_y: 0,
+		body_position_y: -2,
     };
     return pose;
 }
@@ -115,6 +115,7 @@ function set_Pose(player,pose){
 
 	//
 	player[body].position.y = pose.body_position_y;
+
 }
 
 
@@ -387,7 +388,7 @@ function pose_Forward(Id){
 			pose.LFArm_rotation_y = (120*rad) *side;
 
 			// Back
-			pose.UBArm_rotation_y = (-20*rad) *side;
+			pose.UBArm_rotation_y = (30*rad) *side;
 			pose.UBArm_rotation_z = (50*rad) *side;
 		//
 
@@ -406,6 +407,288 @@ function pose_Forward(Id){
 		//
 		pose.body_position_y += 0.2;
 
+		return pose;
+	}
+//------------
+
+
+
+//---PUNCH POSES---
+	// Bend
+	function pose_Punch_Bend(Id){
+		// pose standards
+		var pose = pose_Empty();
+		var side = 1;
+		if (Id) {side =-1;}
+		//---------------
+
+		pose.body_rotation_y = (-140*rad) *side;
+
+		// ARMS
+			// Forward
+			pose.UFArm_rotation_z = (-10*rad) *side;
+
+			pose.LFArm_rotation_x = (15*rad);
+			pose.LFArm_rotation_y = (120*rad) *side;
+
+			// Back
+			pose.UBArm_rotation_x = (50*rad);
+			pose.UBArm_rotation_y = (-20*rad) *side;
+			pose.UBArm_rotation_z = (70*rad) *side;
+
+			pose.LBArm_rotation_y = (-90*rad) *side;
+		//
+
+		// LEGS
+			// Forward
+			pose.UFLeg_rotation_y = (-20*rad) *side;
+			pose.UFLeg_rotation_z = (20*rad) *side;
+
+			pose.LFLeg_rotation_x = (-45*rad);
+
+			// Back
+			pose.UBLeg_rotation_x = (50*rad);
+			pose.UBLeg_rotation_z = (-10*rad) *side;
+
+			pose.LBLeg_rotation_x = (-55*rad);
+		//
+
+		//
+		pose.body_position_y -= 0.5;
+
+		return pose;
+	}
+
+	// Punch
+	function pose_Punch(Id){
+		// pose standards
+		var pose = pose_Empty();
+		var side = 1;
+		if (Id) {side =-1;}
+		//---------------
+
+		pose.body_rotation_y = (-90*rad) *side;
+
+		pose.head_rotation_x = (-10*rad);
+
+		// ARMS
+			// Forward
+			pose.UFArm_rotation_y = (90*rad) *side;
+
+			// Back
+			pose.UBArm_rotation_x = (-40*rad);
+			pose.UBArm_rotation_y = (20*rad) *side;
+			pose.UBArm_rotation_z = (70*rad) *side;
+
+			pose.LBArm_rotation_y = (-120*rad) *side;
+		//
+
+		// LEGS
+			// Forward
+			pose.UFLeg_rotation_x = (-20*rad);
+			pose.UFLeg_rotation_z = (20*rad) *side;
+
+			pose.LFLeg_rotation_x = (-20*rad);
+
+			// Back
+			pose.UBLeg_rotation_x = (50*rad);
+			pose.UBLeg_rotation_z = (-10*rad) *side;
+
+			pose.LBLeg_rotation_x = (-50*rad);
+		//
+
+		//
+		pose.body_position_y -= 0.5;
+
+		return pose;
+	}
+//-------------
+
+
+
+
+
+
+
+//---HIT POSE---
+	// Beginning
+	function pose_HitByKick(Id){
+		// pose standards
+		var pose = pose_Empty();
+		var side = 1;
+		if (Id) {side =-1;}
+		//---------------
+
+		pose.body_rotation_x = (-5*rad);
+		pose.body_rotation_y = (-180*rad) *side;
+		pose.body_rotation_z = (20*rad) *side;
+		
+
+		pose.head_rotation_z = (10*rad) *side;
+
+		// ARMS
+			// Forward
+			pose.UFArm_rotation_x = (40*rad);
+			pose.UFArm_rotation_y = (40*rad) *side;
+			pose.UFArm_rotation_z = (-40*rad) *side;
+
+			pose.LFArm_rotation_y = (70*rad) *side;
+
+			// Back
+			pose.UBArm_rotation_y = (-40*rad) *side;
+			pose.UBArm_rotation_z = (70*rad) *side;
+	
+			pose.LBArm_rotation_y = (-70*rad) *side;
+		// 
+
+		// LEGS
+			// Back
+			pose.UBLeg_rotation_x = (-5*rad);
+			pose.UBLeg_rotation_z = (-20*rad) *side;
+
+			pose.UBLeg_rotation_z += (-10*rad) *side;
+			pose.UBLeg_rotation_y = (10*rad) *side;
+
+			pose.LBLeg_rotation_x = (-30 *rad);
+
+			// Forward
+			pose.UFLeg_rotation_z = (-15*rad) *side;
+			pose.UFLeg_rotation_y = (-15*rad) *side;
+
+			pose.LFLeg_rotation_x = (5*rad) *side;
+			pose.LFLeg_rotation_z = (-5*rad) *side;
+		//
+
+		//
+		pose.body_position_y -= 0.3;
+		return pose; 
+	}
+//-----------
+
+
+
+
+
+
+
+
+//---KO POSES---
+	function pose_KO_Hit(Id){
+		// pose standards
+		var pose = pose_Empty();
+		var side = 1;
+		if (Id) {side =-1;}
+		//---------------
+
+		pose.body_rotation_y = (-130*rad) *side;
+
+		pose.head_rotation_x = (-40*rad);
+
+		// ARMS
+			// Forward
+			pose.UFArm_rotation_y = (70*rad) *side;
+
+			pose.LFArm_rotation_y = (10*rad) *side;
+
+			// Back
+			pose.UBArm_rotation_x = (-10*rad);
+			pose.UBArm_rotation_y = (-80*rad) *side;
+
+			pose.LBArm_rotation_y = (20*rad) *side;
+
+		// LEGS
+			// Forward
+			pose.UFLeg_rotation_x = (80*rad);
+			pose.UFLeg_rotation_z = (30*rad) *side;
+
+			pose.LFLeg_rotation_x = (-30*rad);
+
+			// Back
+			pose.UBLeg_rotation_x = (90*rad);
+			pose.UBLeg_rotation_z = (-10*rad) *side;
+
+			pose.LBLeg_rotation_x = (-15*rad);
+
+
+		//
+
+		return pose;
+	}
+
+	function pose_KO_Fall(Id){
+		// pose standards
+		var pose = pose_Empty();
+		var side = 1;
+		if (Id) {side =-1;}
+		//---------------
+
+		pose.body_rotation_z = (90*rad) *side;
+		pose.body_rotation_x = (90*rad) ;
+
+		pose.head_rotation_x = (-40*rad);
+
+		// ARMS
+			// Forward
+			pose.UFArm_rotation_y = (70*rad) *side;
+
+			pose.LFArm_rotation_y = (10*rad) *side;
+
+			// Back
+			pose.UBArm_rotation_x = (-10*rad);
+			pose.UBArm_rotation_y = (-80*rad) *side;
+
+			pose.LBArm_rotation_y = (20*rad);
+
+		// LEGS
+			// Forward
+			pose.UFLeg_rotation_x = (80*rad);
+			pose.UFLeg_rotation_z = (30*rad) *side;
+
+			pose.LFLeg_rotation_x = (-30*rad);
+
+			// Back
+			pose.UBLeg_rotation_x = (90*rad);
+			pose.UBLeg_rotation_z = (-10*rad) *side;
+
+			pose.LBLeg_rotation_x = (-15*rad);
+		//
+		pose.body_position_y -= 7;
+
+		return pose;
+	}
+
+	function pose_KO_Down(Id){
+		// pose standards
+		var pose = pose_Empty();
+		var side = 1;
+		if (Id) {side =-1;}
+		//---------------
+
+		pose.body_rotation_x = (90*rad);
+		pose.body_rotation_z = (90*rad)*side;
+		
+		// ARMS
+			// Forward
+			pose.UFArm_rotation_y = (-30*rad) *side;
+			pose.UFArm_rotation_z = (-50*rad) *side;
+
+
+			// Back
+			pose.UBArm_rotation_x = (-10*rad);
+			pose.UBArm_rotation_y = (-80*rad) *side;
+			pose.UBArm_rotation_z = (40*rad) *side;
+
+			pose.LBArm_rotation_y = (90*rad);
+
+		// LEGS
+			// Forward
+			pose.UFLeg_rotation_x = (30*rad);
+
+			pose.LFLeg_rotation_x = (-60*rad);
+			// Back
+
+		pose.body_position_y -= 7;
+	
 		return pose;
 	}
 //-------------

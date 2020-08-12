@@ -22,6 +22,7 @@ var bbox = 11;
 
 
 
+
 var blue= [];
 var red = [];
 
@@ -33,34 +34,73 @@ for(var i = 0; i<10; i++) {
 	red[bbox][i] = new THREE.Box3();
 }
 
+var hp_bar = [];
 
 
 var scene, camera, renderer;
 function init() {
 	
+	
 	//Scene
 	scene = new THREE.Scene();
+
+	//var texture = new THREE.TextureLoader().load( "bear.jpg" );
+	
+	scene.background = new THREE.Color(0x000000);
 	//Camera
 	camera = new THREE.OrthographicCamera(window.innerWidth/-50, window.innerWidth/ 50, window.innerHeight/ 50, window.innerHeight/ -50, 1, 1000 );
 	camera.position.z = 10;
 	//Renderer
 	renderer = new THREE.WebGLRenderer();
-	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.setSize(window.innerWidth *(0.988), window.innerHeight*(0.968));
 	//Place Scene
 	document.body.appendChild(renderer.domElement);
 
-	//Create Fighters
+
+
+	//-----------------FIGHTERS----------------//
+	//Create Blue
 	createBlue(blue);
+	setAnimation(blue,blueId);
+
 	reset(blue,blueId);
+	//
 
+	//Create Red
 	createRed(red);
-	reset(red,redId);
+	setAnimation(red,redId);
 
-	red[body].position.x = -8;
-	blue[body].position.x = 8;
+	reset(red,redId);
+	//
+
+	red[body].position.x = -6;
+	blue[body].position.x = 6;
 
 	set_Pose(red,pose_Bend(redId));
 	set_Pose(blue,pose_Bend(blueId));
+	//-----------------------------------------//
+
+
+
+	//----------------HP BARS------------------//
+	// Red HP
+	var red_bar = document.createElement('div');
+	red_bar.style.cssText = 'position: absolute; left: 2%; top: 5%; background-color: red; width: 45%; height: 40px; transform: rotate(180deg)';
+	document.body.appendChild(red_bar);
+	
+	hp_bar[redId] = document.createElement('div');
+	hp_bar[redId].style.cssText = 'position: absolute; background-color: yellow; width: 100%; height: 40px';
+	red_bar.appendChild(hp_bar[redId]);
+
+	// Blue HP
+	var blue_bar = document.createElement('div');
+	blue_bar.style.cssText = 'position: absolute; right: 2%; top: 5%; background-color: red; width: 45%; height: 40px';
+	document.body.appendChild(blue_bar);
+
+	hp_bar[blueId] = document.createElement('div');
+	hp_bar[blueId].style.cssText = 'position: absolute; background-color: yellow; width: 100%; height: 40px';
+	blue_bar.appendChild(hp_bar[blueId]);
+	//-----------------------------------------//
 }
 
 
@@ -77,9 +117,9 @@ function animate() {
 
 	update(blue,blueId,red,redId); //update blue status against red
 	update(red,redId,blue,blueId); //update red status against blue
+
+	update_Hp(hp_bar);
 }
-
-
 
 
 
@@ -89,11 +129,12 @@ function animate() {
 function onWindowResize(){
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
-	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.setSize(window.innerWidth *(0.988), window.innerHeight*(0.968));
 }
 
 window.addEventListener('resize', onWindowResize, false);
 //-------------------
+
 
 //---KeyBoard Checking---
 window.addEventListener("keypress", keyHandler, false);
@@ -114,13 +155,30 @@ var output2;
 function hitbox_Attempt(){
 	//
 	output1 = document.createElement('div');
-	output1.style.cssText = 'position: absolute; left: 50px; top: 50px; font-size: 50px; color:white';
+	output1.style.cssText = 'position: absolute; left: 50px; top: 100px; font-size: 50px; color:white';
 	document.body.appendChild(output1);	
 	//
 	output2 = document.createElement('div');
-	output2.style.cssText = 'position: absolute; right: 50px; top: 50px; font-size: 50px; color:white';
+	output2.style.cssText = 'position: absolute; right: 50px; top: 100px; font-size: 50px; color:white';
 	document.body.appendChild(output2);	
 }
+
+init();
+hitbox_Attempt();
+animate();
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function pippo(Id, action){
@@ -144,8 +202,5 @@ function pippo(Id, action){
 
 
 
-init();
-hitbox_Attempt();
-animate();
 
 
