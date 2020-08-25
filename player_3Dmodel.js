@@ -88,7 +88,7 @@ function createFighter(clr){
 
 	//---Body
 	var geometry = new THREE.BoxGeometry(2, 4.5, 2);
-	var material = new THREE.MeshBasicMaterial( {color: clr} ); 
+	var material = new THREE.MeshLambertMaterial( {color: clr} ); 
 	var body = new THREE.Mesh(geometry, material);
 	body.geometry.computeBoundingBox();
 
@@ -96,7 +96,7 @@ function createFighter(clr){
 	
 	//---Head
 	geometry = new THREE.SphereGeometry(1);
-	material = new THREE.MeshBasicMaterial ( {color: 0xffc0cb}) //pink
+	material = new THREE.MeshLambertMaterial ( {color: 0xffc0cb}) //pink
 	var head = new THREE.Mesh(geometry, material);
 	head.geometry.computeBoundingBox();
 
@@ -107,7 +107,7 @@ function createFighter(clr){
 	
 	//---Forearm Left
 	geometry = new THREE.BoxGeometry( 2, 0.75, 0.75);
-	material = new THREE.MeshBasicMaterial( {color: 0xffff00} ); 
+	material = new THREE.MeshLambertMaterial( {color: clr} ); 
 	var forearmLeft = new THREE.Mesh(geometry, material);
 	forearmLeft.geometry.computeBoundingBox();
 
@@ -118,7 +118,7 @@ function createFighter(clr){
 	
 	//---Arm Left
 	geometry = new THREE.BoxGeometry(2, 0.5, 0.5);
-	material = new THREE.MeshBasicMaterial ( {color: 0xffc0cb}) //pink
+	material = new THREE.MeshLambertMaterial ( {color: 0xffc0cb}) //pink
 	var armLeft = new THREE.Mesh(geometry, material);
 	armLeft.geometry.computeBoundingBox();
 
@@ -129,7 +129,7 @@ function createFighter(clr){
     
 	//---Forearm Right
 	geometry = new THREE.BoxGeometry( 2, 0.75, 0.75);
-	material = new THREE.MeshBasicMaterial( {color: 0x00ffff} ); 
+	material = new THREE.MeshLambertMaterial( {color: clr} ); 
 	var forearmRight = new THREE.Mesh(geometry, material);
 	forearmRight.geometry.computeBoundingBox();
 
@@ -140,7 +140,7 @@ function createFighter(clr){
 
 	//---Arm Right
 	geometry = new THREE.BoxGeometry(2, 0.5, 0.5);
-	material = new THREE.MeshBasicMaterial ( {color: 0xffc0cb}) //pink
+	material = new THREE.MeshLambertMaterial ( {color: 0xffc0cb}) //pink
 	var armRight = new THREE.Mesh(geometry, material);
 	armRight.geometry.computeBoundingBox();
 
@@ -151,7 +151,7 @@ function createFighter(clr){
     
 	//---UpperLeg Left
 	geometry = new THREE.BoxGeometry( 0.75, 2.5, 0.75);
-	material = new THREE.MeshBasicMaterial( {color: 0xff00ff} ); 
+	material = new THREE.MeshLambertMaterial( {color: clr} ); 
 	var upperLegLeft = new THREE.Mesh(geometry, material);
 	upperLegLeft.geometry.computeBoundingBox();
 
@@ -162,7 +162,7 @@ function createFighter(clr){
     
 	//---LowerLeg Left
 	geometry = new THREE.BoxGeometry(0.5, 3.0, 0.5);
-	material = new THREE.MeshBasicMaterial ( {color: 0xffc0cb}) //pink
+	material = new THREE.MeshLambertMaterial ( {color: 0xffc0cb}) //pink
 	var lowerLegLeft = new THREE.Mesh(geometry, material);
 	lowerLegLeft.geometry.computeBoundingBox();
 
@@ -173,7 +173,7 @@ function createFighter(clr){
 
 	//---UpperLeg Right
 	geometry = new THREE.BoxGeometry( 0.75, 2.5, 0.75);
-    material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );  
+    material = new THREE.MeshLambertMaterial( {color: clr} );  
 	var upperLegRight = new THREE.Mesh(geometry, material);
 	upperLegRight.geometry.computeBoundingBox();
 
@@ -184,7 +184,7 @@ function createFighter(clr){
 
 	//---LowerLeg Right
 	geometry = new THREE.BoxGeometry(0.5, 3.0, 0.5);
-	material = new THREE.MeshBasicMaterial ( {color: 0xffc0cb}) //pink
+	material = new THREE.MeshLambertMaterial ( {color: 0xffc0cb}) //pink
 	var lowerLegRight = new THREE.Mesh(geometry,material);
 	lowerLegRight.geometry.computeBoundingBox();
 

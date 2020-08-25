@@ -79,10 +79,10 @@ function reset(player,Id){
 var mov_speed_forward = 0.2;
 var mov_speed_back = 0.15;
 
-var mov_duration = 300;
+var mov_duration = 250;
 var kick_duration = 800;
 var punch_duration = 500;
-var hit_duration = 500;
+var hit_duration = 400;
 
 var edge = 15; //the edges of the screen
 var distance = 4; //minimum distance between the two figther
@@ -95,14 +95,14 @@ function player_Handler(key, player, Id){
     if (Id) { //Blue
         var forward = 111; // o
         var back = 112;    // p
-        var kick = 107;    // k
-        var punch = 106;   // j
+        var kick = 106;    // j
+        var punch = 107;   // k
     }
     else{ 
         var forward = 119; // w
         var back = 113;    // q
-        var kick = 115;    // s
-        var punch = 100;   // d
+        var kick = 100;    // d
+        var punch = 115;   // s
     }
 
 
@@ -228,11 +228,11 @@ function update(player,p_Id,adv,a_Id){
 
             if (p_Id){ // Blue
                 var limit = limit_right(pos,a_pos);
-                pos = Math.min(limit,pos + 0.08); 
+                pos = Math.min(limit,pos + 0.12); 
             }
             else{ // Red
                 var limit = limit_left(pos,a_pos);
-                pos = Math.max(limit,pos - 0.08); 
+                pos = Math.max(limit,pos - 0.12); 
             }
         break;
 
@@ -254,11 +254,6 @@ function update(player,p_Id,adv,a_Id){
 
     }
     player[body].position.x = pos;
-    //
-    //
-    pippo(p_Id, action[p_Id]);
-    //
-    //
 }
 
 
@@ -318,7 +313,7 @@ function endGame(l_Id){  // Ineluttabile
     }
     else {                 // BLUE WINS
         var w_Id = blueId;
-        win_quote.style.cssText = 'position: absolute; left: 470px; top: 100px; font-size: 80px; color:blue';
+        win_quote.style.cssText = 'position: absolute; left: 460px; top: 100px; font-size: 80px; color:blue';
         document.body.appendChild(win_quote);
         win_quote.innerHTML = "BLUE WINS";
     }

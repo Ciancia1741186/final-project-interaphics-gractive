@@ -44,15 +44,42 @@ function init() {
 	//Scene
 	scene = new THREE.Scene();
 
-	//var texture = new THREE.TextureLoader().load( "bear.jpg" );
-	
-	scene.background = new THREE.Color(0x000000);
-	//Camera
+	// BackGround
+	var texture = new THREE.TextureLoader().load( "dojo.jpg" );
+	scene.background = texture;
+
+	// Camera
 	camera = new THREE.OrthographicCamera(window.innerWidth/-50, window.innerWidth/ 50, window.innerHeight/ 50, window.innerHeight/ -50, 1, 1000 );
 	camera.position.z = 10;
+
+	// Light
+	var light = new THREE.AmbientLight(0xffffff, 0.3);
+	scene.add(light);
+
+	var PLight = new THREE.PointLight(0xffffff, 10, 25);
+	scene.add(PLight);
+
+	PLight.position.y +=5;
+	PLight.position.z +=2;
+
+	// Audio
+	var listener = new THREE.AudioListener();
+	camera.add( listener );
+
+	var sound = new THREE.Audio( listener );
+
+	var audioLoader = new THREE.AudioLoader();
+	audioLoader.load( 'musica.mp3', function( buffer ) {
+		sound.setBuffer( buffer );
+		sound.setLoop( true );
+		sound.setVolume( 0.5 );
+		sound.play();
+	});
+
 	//Renderer
 	renderer = new THREE.WebGLRenderer();
-	renderer.setSize(window.innerWidth *(0.988), window.innerHeight*(0.968));
+	renderer.setSize(window.innerWidth *(0.990), window.innerHeight*(0.968));
+
 	//Place Scene
 	document.body.appendChild(renderer.domElement);
 
@@ -111,10 +138,6 @@ function animate() {
 	TWEEN.update();
 	renderer.render(scene, camera);
 
-	
-	//blue[body].rotation.y += 0.01;
-	//red[body].rotation.y -= 0.01;
-
 	update(blue,blueId,red,redId); //update blue status against red
 	update(red,redId,blue,blueId); //update red status against blue
 
@@ -149,48 +172,25 @@ function keyHandler(key){
 
 
 
-var output1;
-var output2;
+var word1;
+var word2;
 
 function hitbox_Attempt(){
 	//
-	output1 = document.createElement('div');
-	output1.style.cssText = 'position: absolute; left: 50px; top: 100px; font-size: 50px; color:white';
-	document.body.appendChild(output1);	
+	word1 = document.createElement('div');
+	word1.style.cssText = 'position: absolute; left: 30px; top: 75px; font-size: 50px; color:white';
+	document.body.appendChild(word1);
+	word1.innerHTML = 'Red';	
 	//
-	output2 = document.createElement('div');
-	output2.style.cssText = 'position: absolute; right: 50px; top: 100px; font-size: 50px; color:white';
-	document.body.appendChild(output2);	
+	word2 = document.createElement('div');
+	word2.style.cssText = 'position: absolute; right: 30px; top: 75px; font-size: 50px; color:white';
+	document.body.appendChild(word2);
+	word2.innerHTML = 'Blue';	
 }
 
 init();
 hitbox_Attempt();
 animate();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function pippo(Id, action){
-	var output = output1;
-	var name = "Red";
-	if(Id) {
-		name = "Blue";
-		output = output2;
-	}
-
-	output.innerHTML = name+ ' is ' + action;
-}
 
 
 
