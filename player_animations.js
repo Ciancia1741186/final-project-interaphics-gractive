@@ -150,12 +150,12 @@ function animation_Punch(player, Id, pose, duration){
 
 
 // DAMAGE ANIMATION
-function animation_HitByKick(player,Id, pose, duration){
+function animation_Hit(player,Id, pose, duration){
 
-	pose = pose_HitByKick(Id);
+	pose = pose_Hit(Id);
 
 	var tween = new TWEEN.Tween(pose)
-		.to(pose_HitByKick(Id), duration *(3/4))	
+		.to(pose_Hit(Id), duration *(3/4))	
 		.onUpdate(function(){set_Pose(player,pose);})	
 		.onComplete(function(){action[Id] = "idle";})
 	;

@@ -42,7 +42,7 @@ function setAnimation(player,Id){
     animation[Id][anim_Bdash] = animation_Back(player, Id, pose[Id], mov_duration);
     animation[Id][anim_kick] = animation_Kick(player, Id, pose[Id], kick_duration);
     animation[Id][anim_punch] = animation_Punch(player, Id, pose[Id], punch_duration);
-    animation[Id][anim_hit] = animation_HitByKick(player, Id, pose[Id], hit_duration);
+    animation[Id][anim_hit] = animation_Hit(player, Id, pose[Id], hit_duration);
     animation[Id][anim_KO] = animation_KO(player, Id, pose[Id], 1200);
 }
 // ------------------ //
@@ -76,8 +76,8 @@ function reset(player,Id){
 
 
 // STATS //
-var mov_speed_forward = 0.2;
-var mov_speed_back = 0.15;
+var mov_speed_forward = 0.25;
+var mov_speed_back = 0.175;
 
 var mov_duration = 250;
 var kick_duration = 800;
@@ -300,6 +300,7 @@ function setHitFlag(Id,value){
 // ENDGAME
 function endGame(l_Id){  // Ineluttabile
 
+    ko();
     keyFlag = [false, false];
 
     // Win Quotes
@@ -322,6 +323,8 @@ function endGame(l_Id){  // Ineluttabile
     action[w_Id] = "victorious";
     //
 
+
+    
     // Restart Quote
     refreshFlag = true;
 

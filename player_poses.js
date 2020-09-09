@@ -512,7 +512,7 @@ function pose_Forward(Id){
 
 //---HIT POSE---
 	// Beginning
-	function pose_HitByKick(Id){
+	function pose_Hit(Id){
 		// pose standards
 		var pose = pose_Empty();
 		var side = 1;

@@ -45,36 +45,54 @@ function init() {
 	scene = new THREE.Scene();
 
 	// BackGround
-	var texture = new THREE.TextureLoader().load( "dojo.jpg" );
+	var texture = new THREE.TextureLoader().load( "Textures/dojo.jpg" );
 	scene.background = texture;
+	//scene.background = new THREE.Color( 0xffffff );   //!!!!!!
 
 	// Camera
 	camera = new THREE.OrthographicCamera(window.innerWidth/-50, window.innerWidth/ 50, window.innerHeight/ 50, window.innerHeight/ -50, 1, 1000 );
 	camera.position.z = 10;
 
 	// Light
-	var light = new THREE.AmbientLight(0xffffff, 0.3);
+	var light = new THREE.AmbientLight(0xffffff, 0.5);
 	scene.add(light);
 
-	var PLight = new THREE.PointLight(0xffffff, 10, 25);
+	var PLight = new THREE.PointLight(0xffffff, 2, 25);
 	scene.add(PLight);
 
 	PLight.position.y +=5;
-	PLight.position.z +=2;
+	PLight.position.z +=7;
 
-	// Audio
-	var listener = new THREE.AudioListener();
-	camera.add( listener );
+	// ------- Audio ---------
+	// music
+	var music_listener = new THREE.AudioListener();
+	camera.add( music_listener );
 
-	var sound = new THREE.Audio( listener );
+	var music_audio = new THREE.Audio( music_listener );
 
-	var audioLoader = new THREE.AudioLoader();
-	audioLoader.load( 'musica.mp3', function( buffer ) {
-		sound.setBuffer( buffer );
-		sound.setLoop( true );
-		sound.setVolume( 0.5 );
-		sound.play();
+	var musicLoader = new THREE.AudioLoader();
+	musicLoader.load( 'Music/fight_music.mp3', function( buffer ) {
+		music_audio.setBuffer( buffer );
+		music_audio.setLoop( true );
+		music_audio.setVolume( 0.3 );
+		music_audio.play();
 	});
+	
+	// sound
+	var sound_listener = new THREE.AudioListener();
+	camera.add( sound_listener );
+
+	var sound_audio = new THREE.Audio( sound_listener );
+
+	var soundLoader = new THREE.AudioLoader();
+	soundLoader.load( 'Music/fight_sound.mp3', function( buffer ) {
+		sound_audio.setBuffer( buffer );
+		sound_audio.setLoop( false );
+		sound_audio.setVolume( 0.5 );
+		sound_audio.play();
+	});
+	
+	// -----------------------
 
 	//Renderer
 	renderer = new THREE.WebGLRenderer();
@@ -118,6 +136,11 @@ function init() {
 	hp_bar[redId] = document.createElement('div');
 	hp_bar[redId].style.cssText = 'position: absolute; background-color: yellow; width: 100%; height: 40px';
 	red_bar.appendChild(hp_bar[redId]);
+	// name
+	var word1 = document.createElement('div');
+	word1.style.cssText = 'position: absolute; left: 30px; top: 75px; font-size: 50px; color:white';
+	document.body.appendChild(word1);
+	word1.innerHTML = 'Red';
 
 	// Blue HP
 	var blue_bar = document.createElement('div');
@@ -127,10 +150,13 @@ function init() {
 	hp_bar[blueId] = document.createElement('div');
 	hp_bar[blueId].style.cssText = 'position: absolute; background-color: yellow; width: 100%; height: 40px';
 	blue_bar.appendChild(hp_bar[blueId]);
+	// name
+	var word2 = document.createElement('div');
+	word2.style.cssText = 'position: absolute; right: 30px; top: 75px; font-size: 50px; color:white';
+	document.body.appendChild(word2);
+	word2.innerHTML = 'Blue';
 	//-----------------------------------------//
 }
-
-
 
 
 function animate() {
@@ -144,6 +170,8 @@ function animate() {
 	update_Hp(hp_bar);
 }
 
+init();
+animate();
 
 
 
@@ -165,33 +193,25 @@ window.addEventListener("keypress", keyHandler, false);
 function keyHandler(key){
 	player_Handler(key,blue,blueId);
 	player_Handler(key,red,redId);
-}
+};
 //-----------------------
 
 
 
+function ko(){
+	var sound_listener = new THREE.AudioListener();
+	camera.add( sound_listener );
 
+	var sound_audio = new THREE.Audio( sound_listener );
 
-var word1;
-var word2;
-
-function hitbox_Attempt(){
-	//
-	word1 = document.createElement('div');
-	word1.style.cssText = 'position: absolute; left: 30px; top: 75px; font-size: 50px; color:white';
-	document.body.appendChild(word1);
-	word1.innerHTML = 'Red';	
-	//
-	word2 = document.createElement('div');
-	word2.style.cssText = 'position: absolute; right: 30px; top: 75px; font-size: 50px; color:white';
-	document.body.appendChild(word2);
-	word2.innerHTML = 'Blue';	
-}
-
-init();
-hitbox_Attempt();
-animate();
-
+	var soundLoader = new THREE.AudioLoader();
+	soundLoader.load( 'Music/KO_sound.mp3', function( buffer ) {
+		sound_audio.setBuffer( buffer );
+		sound_audio.setLoop( false );
+		sound_audio.setVolume( 1.0 );
+		sound_audio.play();
+	});
+};
 
 
 

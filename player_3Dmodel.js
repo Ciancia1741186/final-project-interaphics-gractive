@@ -23,7 +23,7 @@ var bbox = 11;
 
 
 function createBlue(array){
-	var blue_fighter = createFighter(0x0000ff);
+	var blue_fighter = createFighter(0x0000ff,blueId);
 	var i = 0;
 	array[body] = blue_fighter[i++];
 	array[head] = blue_fighter[i++];
@@ -54,7 +54,7 @@ function createBlue(array){
 
 
 function createRed(array){
-	var red_fighter = createFighter(0xff0000);
+	var red_fighter = createFighter(0xff0000,redId);
 	var i = 0;
 	array[body] = red_fighter[i++];
 	array[head] = red_fighter[i++];
@@ -84,11 +84,27 @@ function createRed(array){
 }
 
 
-function createFighter(clr){
+function createFighter(clr,Id){
+	if (Id){
+		var tunicFront = new THREE.TextureLoader().load('Textures/blue_front.jpg');
+		var tunic = new THREE.TextureLoader().load('Textures/blue_tunic.jpg');
+	}
+	else {
+		var tunicFront = new THREE.TextureLoader().load('Textures/red_front.jpg');
+		var tunic = new THREE.TextureLoader().load('Textures/red_tunic.jpg');
+	}
 
 	//---Body
 	var geometry = new THREE.BoxGeometry(2, 4.5, 2);
-	var material = new THREE.MeshLambertMaterial( {color: clr} ); 
+	var body_materials = [
+		new THREE.MeshLambertMaterial( { map: tunic, side: THREE.DoubleSide } ), // Right
+		new THREE.MeshLambertMaterial( { map: tunic, side: THREE.DoubleSide } ), // Left
+		new THREE.MeshLambertMaterial( { color: clr, side: THREE.DoubleSide } ), // Top
+		new THREE.MeshLambertMaterial( { color: clr, side: THREE.DoubleSide } ), // Botton
+		new THREE.MeshLambertMaterial( { map: tunic, side: THREE.DoubleSide } ),      // Back
+		new THREE.MeshLambertMaterial( { map: tunicFront, side: THREE.DoubleSide } ), // Front
+	];
+	var material = new THREE.MeshFaceMaterial( body_materials ); 
 	var body = new THREE.Mesh(geometry, material);
 	body.geometry.computeBoundingBox();
 
