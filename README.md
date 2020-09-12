@@ -21,8 +21,11 @@ If you cloned the repository, in order to play the game you need to open the "in
 
 * **RED**
 o **Q:** dash forward.
+
 o **W:** dash back.
+
 o **S:** punch.
+
 o **D:** kick.
 
 * **BLUE**
