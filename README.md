@@ -1,7 +1,7 @@
 # Interactive Graphics' Final Project - Super Mario
 *Developed by Ciancia Marco*
 
-![Alt text](https://github.com/SapienzaInteractiveGraphicsCourse/final-project-interaphics-gractive/edit/master/Img/title.jpg)
+![Alt text](https://github.com/SapienzaInteractiveGraphicsCourse/final-project-interaphics-gractive/blob/master/Img/title.jpg)
 
 Game based on the famous Super Mario platform game. More precisely, the project recreates Super Mario Bros’ first level.
 The main goal of this game is to finish the level collecting as many coins as possible without losing life against enemies (goombas). 
