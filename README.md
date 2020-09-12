@@ -9,8 +9,6 @@ The goal of this project is to recreate a very basic experience of what a fighti
 - a 2D stage
 - the first that takes down the other by consuming his life bar with punch and kicks win !
 
-![Alt text]()
-
 ## Launching the game
 
 In order to try the game, you just need to click on the following [**LINK**](https://sapienzainteractivegraphicscourse.github.io/final-project-interaphics-gractive/index.html).
@@ -22,16 +20,16 @@ If you cloned the repository, in order to play the game you need to open the "in
 ## Controls
 
 * **RED**
-* **Q:** dash forward
-* **W:** dash back
-* **S:** punch
-* **D:** kick
+- **Q:** dash forward
+- **W:** dash back
+- **S:** punch
+- **D:** kick
 
 * **BLUE**
-* **O:** dash forward
-* **P:** dash back
-* **K:** punch
-* **J:** kick
+- **O:** dash forward
+- **P:** dash back
+- **K:** punch
+- **J:** kick
 
 ## Built With
 
