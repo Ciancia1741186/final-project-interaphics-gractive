@@ -5,7 +5,7 @@
 
 Game based on the famous fighting-game series Street Figther.
 The goal of this project is to recreate a very basic experience of what a fighting game has to offer:
-- two player , each with his personal life bar
+- two players , each with his personal life bar
 - a 2D stage
 - the first that takes down the other by consuming his life bar with punch and kicks win !
 
