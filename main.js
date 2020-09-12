@@ -47,7 +47,6 @@ function init() {
 	// BackGround
 	var texture = new THREE.TextureLoader().load( "Textures/dojo.jpg" );
 	scene.background = texture;
-	//scene.background = new THREE.Color( 0xffffff );   //!!!!!!
 
 	// Camera
 	camera = new THREE.OrthographicCamera(window.innerWidth/-50, window.innerWidth/ 50, window.innerHeight/ 50, window.innerHeight/ -50, 1, 1000 );
