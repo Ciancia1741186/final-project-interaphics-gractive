@@ -19,17 +19,17 @@ If you cloned the repository, in order to play the game you need to open the "in
 
 ## Controls
 
-** **RED**
-**Q:** dash forward
-**W:** dash back
-**S:** punch
-**D:** kick
+* **RED**
+> **Q:** dash forward
+> **W:** dash back
+> **S:** punch
+> **D:** kick
 
-** **BLUE**
-**O:** dash forward
-**P:** dash back
-**K:** punch
-**J:** kick
+* **BLUE**
+> **O:** dash forward
+> **P:** dash back
+> **K:** punch
+> **J:** kick
 
 ## Built With
 
