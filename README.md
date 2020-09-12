@@ -25,11 +25,11 @@ o **RED**
 * **S:** punch.
 * **D:** kick.
 
-* **BLUE**
-> **O:** dash forward
-> **P:** dash back
-> **K:** punch
-> **J:** kick
+o **BLUE**
+* **O:** dash forward
+* **P:** dash back
+* **K:** punch
+* **J:** kick
 
 ## Built With
 
