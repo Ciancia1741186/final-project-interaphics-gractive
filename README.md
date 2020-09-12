@@ -3,10 +3,13 @@
 
 ![Alt text](https://github.com/SapienzaInteractiveGraphicsCourse/final-project-interaphics-gractive/blob/master/Img/title.jpg)
 
-Game based on the famous Super Mario platform game. More precisely, the project recreates Super Mario Bros’ first level.
-The main goal of this game is to finish the level collecting as many coins as possible without losing life against enemies (goombas). 
+Game based on the famous fighting-game series Street Figther.
+The goal of this project is to recreate a very basic experience of what a fighting game has to offer:
+- two player , each with his personal life bar
+- a 2D stage with no escape
+- the first that takes down the other by consuming his life bar with punch and kicks win !
 
-![Alt text](https://github.com/SapienzaInteractiveGraphicsCourse/final-project-clashers/blob/master/img/previewGame.png)
+![Alt text]()
 
 ## Launching the game
 
