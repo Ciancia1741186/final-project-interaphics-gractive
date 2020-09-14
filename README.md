@@ -3,7 +3,7 @@
 
 ![Alt text](https://github.com/SapienzaInteractiveGraphicsCourse/final-project-interaphics-gractive/blob/master/Img/title.jpg)
 
-Game based on the famous fighting-game series Street Figther.
+Game based on the famous fighting-game series Street Fighter.
 The goal of this project is to recreate a very basic experience of what a fighting game has to offer:
 - two players , each with his personal life bar
 - a 2D stage
@@ -42,7 +42,7 @@ For more details about how the project has been developed please refers to the [
 
 ## Known Issues
 
-* Sometimes it may happen that the animations overlap eache other is not register right, for example a kick may hit you during a back dash and take off you hp but it looks like the game doesn't recognize it and does not play the hit animation making the player able to move freely and "punish on hit" the other one.
+* Sometimes it may happen that the animations overlap each other is not register right, for example a kick may hit you during a back dash and take off you hp but it looks like the game doesn't recognize it and does not play the hit animation making the player able to move freely and "punish on hit" the other one.
 * Audio doesn't work if the level page is simply refreshed; if the console outputs audio error, you need to go back to the start screen and reload the level.
 
 ## Author
