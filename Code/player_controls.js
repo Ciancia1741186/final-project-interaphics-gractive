@@ -305,16 +305,17 @@ function endGame(l_Id){  // Ineluttabile
 
     // Win Quotes
     var win_quote = document.createElement('div');
-    
+    winWidth = window.innerWidth
+	winHeight = window.innerHeight
+
     if (l_Id == blueId) {  // RED WINS
-        var w_Id = redId;
-        win_quote.style.cssText = 'position: absolute; left: 490px; top: 100px; font-size: 80px; color:red';
+        win_quote.style.cssText = 'position: absolute; text-align:center; left: '+ String(winWidth/2.7) +'px; top: '+ String(winHeight/4) +'px; font-size: 80px; color:red';
         document.body.appendChild(win_quote);
         win_quote.innerHTML = "RED WINS";
     }
     else {                 // BLUE WINS
         var w_Id = blueId;
-        win_quote.style.cssText = 'position: absolute; left: 460px; top: 100px; font-size: 80px; color:blue';
+        win_quote.style.cssText = 'position: absolute; text-align:center; left: '+ String(winWidth/2.7) +'px; top: '+ String(winHeight/4) +'px; font-size: 80px; color:blue';
         document.body.appendChild(win_quote);
         win_quote.innerHTML = "BLUE WINS";
     }
@@ -329,7 +330,7 @@ function endGame(l_Id){  // Ineluttabile
     refreshFlag = true;
 
     var restart_quote = document.createElement('div');
-    restart_quote.style.cssText = 'position: absolute; left: 550px; top: 180px; font-size: 30px; color:white';
+    restart_quote.style.cssText = 'position: absolute; text-align: center; left: '+ String(winWidth/2.45) +'px; top: '+ String(winHeight/2.8) +'px; font-size: 30px; color:white';
     document.body.appendChild(restart_quote);
     restart_quote.innerHTML = "press SPACE to restart";
     //
